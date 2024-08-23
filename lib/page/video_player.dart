@@ -12,15 +12,21 @@ class VideoPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<VideoController>(
-      builder: (controller) => Center(
-        child: controller.videoPlayerController.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: controller.videoPlayerController.value.aspectRatio,
-                child: Chewie(
-                  controller: controller.chewieController,
-                ),
-              )
-            : const CircularProgressIndicator(),
+      builder: (controller) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            controller.videoPlayerController.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio:
+                        controller.videoPlayerController.value.aspectRatio,
+                    child: Chewie(
+                      controller: controller.chewieController,
+                    ),
+                  )
+                : const CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }
