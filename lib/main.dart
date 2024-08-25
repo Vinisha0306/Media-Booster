@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:media_player/page/all_video_page.dart';
 import 'package:media_player/page/audio_player.dart';
 import 'package:media_player/page/video_player.dart';
 
@@ -33,7 +34,7 @@ class MediaPlayerHome extends StatelessWidget {
         body: TabBarView(
           children: [
             AudioPlayer(),
-            VideoPlayer(),
+            AllVideoPlayer(),
           ],
         ),
       ),
