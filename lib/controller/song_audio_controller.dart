@@ -4,14 +4,10 @@ class SongAudioController {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
   String? currentAudio;
 
-  SongAudioController() {
-    init();
-  }
-
   Future<void> init() async {
     await audioPlayer.open(
       Audio(
-        currentAudio ?? 'lib/assets/audio/aavo_saravottam.mp3',
+        currentAudio ?? 'assets/audio/dynamite.mp3',
         metas: Metas(title: 'Song'),
       ),
       autoStart: false,
