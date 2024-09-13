@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:media_player/constsnt/list.dart';
-import 'package:media_player/views/audio_player_screen.dart';
+
+import '../controller/song_audio_controller.dart';
+import 'audio_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -109,14 +111,21 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               textFront(title: 'Trending'),
+              const SizedBox(
+                height: 15,
+              ),
               Expanded(
                   flex: 5,
                   child: ListView.separated(
                       itemBuilder: (context, index) => GestureDetector(
                             onTap: () {
+                              songAudioController.currentAudio =
+                                  trendingSongList[index]['song'];
+                              print(
+                                  'print data :: ${songAudioController.currentAudio}');
                               Get.toNamed(
                                 '/audio',
-                                arguments: trendingSongList[index],
+                                arguments: index,
                               );
                             },
                             child: Row(

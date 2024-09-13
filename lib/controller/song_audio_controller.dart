@@ -5,14 +5,18 @@ class SongAudioController {
   String? currentAudio;
 
   Future<void> init() async {
-    await audioPlayer.open(
-      Audio(
-        currentAudio ?? 'assets/audio/dynamite.mp3',
-        metas: Metas(title: 'Song'),
-      ),
-      autoStart: false,
-      showNotification: true,
-    );
+    await audioPlayer
+        .open(
+          Audio(
+            currentAudio ?? 'assets/audio/dynamite.mp3',
+            metas: Metas(title: 'Song'),
+          ),
+          autoStart: false,
+          showNotification: true,
+        )
+        .then(
+          (value) => print('data init'),
+        );
   }
 
   Future<void> playSong() async {
