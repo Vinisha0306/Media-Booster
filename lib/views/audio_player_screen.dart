@@ -1,8 +1,8 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:media_player/constsnt/list.dart';
-import 'package:media_player/controller/pageController.dart';
 
 import '../controller/play_pause_controller.dart';
 import '../controller/song_audio_controller.dart';
@@ -18,11 +18,11 @@ final SongAudioController songAudioController = SongAudioController();
 
 class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   final PlayPauseController playPauseController = PlayPauseController();
-  final PageControlController pageController = PageControlController();
 
   @override
   void initState() {
     print('print init :: ${songAudioController.currentAudio}');
+    songAudioController.audioPlayer = AssetsAudioPlayer();
     songAudioController.init();
     super.initState();
   }
@@ -37,29 +37,14 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   Widget build(BuildContext context) {
     double max = 0;
 
-    int dataIndex = ModalRoute.of(context)!.settings.arguments as int;
-    pageController.index.value = dataIndex;
-    int index = pageController.index.value;
+    int index = ModalRoute.of(context)!.settings.arguments as int;
+
     Map data = trendingSongList[index];
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
           children: [
-            Positioned(
-              left: 0,
-              top: 0,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  print('is pop');
-                },
-                icon: const Icon(
-                  CupertinoIcons.back,
-                  color: Colors.white,
-                ),
-              ),
-            ),
             Container(
               height: double.infinity,
               width: double.infinity,
@@ -72,8 +57,10 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   opacity: 0.5,
                 ),
               ),
+              alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Obx(
                     () {
@@ -88,6 +75,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                               height: 250,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
+                                color: Colors.white.withOpacity(0.5),
                                 image: DecorationImage(
                                   image: NetworkImage(
                                     data['image']!,
@@ -168,17 +156,6 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                IconButton(
-                                  icon: const Icon(Icons.skip_previous),
-                                  iconSize: 48,
-                                  color:
-                                      index == 0 ? Colors.grey : Colors.white,
-                                  onPressed: index == 0
-                                      ? () {}
-                                      : () {
-                                          pageController.decrement(data: index);
-                                        },
-                                ),
                                 playPauseController.isPlay.value
                                     ? IconButton(
                                         icon: const Icon(
@@ -209,19 +186,6 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                                               );
                                         },
                                       ),
-                                IconButton(
-                                  icon: const Icon(Icons.skip_next),
-                                  iconSize: 48,
-                                  color: index == trendingSongList.length - 1
-                                      ? Colors.grey
-                                      : Colors.white,
-                                  onPressed: index ==
-                                          trendingSongList.length - 1
-                                      ? () {}
-                                      : () {
-                                          pageController.increment(data: index);
-                                        },
-                                ),
                               ],
                             ),
                           ],

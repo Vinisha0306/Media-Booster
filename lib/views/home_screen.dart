@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:media_player/constsnt/list.dart';
+import 'package:media_player/views/ListViews/artistList.dart';
+import 'package:media_player/views/ListViews/categoriesList.dart';
+import 'package:media_player/views/ListViews/listView.dart';
 
 import '../controller/song_audio_controller.dart';
 import 'audio_player_screen.dart';
@@ -22,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              textFront(title: 'Categories'),
+              textFront(title: 'Categories', context: context),
               Expanded(
                 flex: 3,
                 child: ListView.separated(
@@ -67,7 +70,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              textFront(title: 'Artists'),
+              textFront(title: 'Artists', context: context),
               Expanded(
                 flex: 5,
                 child: ListView.separated(
@@ -110,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              textFront(title: 'Trending'),
+              textFront(title: 'Trending', context: context),
               const SizedBox(
                 height: 15,
               ),
@@ -214,7 +217,7 @@ Widget homeAppBar() {
   );
 }
 
-Widget textFront({required title}) {
+Widget textFront({required title, required context}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -227,9 +230,22 @@ Widget textFront({required title}) {
         ),
       ),
       Spacer(),
-      Icon(
-        Icons.arrow_forward_ios_rounded,
-        color: Colors.white,
+      GestureDetector(
+        onTap: () {
+          if (title == 'Categories') {
+            Get.to(CategoriesListviewPage());
+          }
+          if (title == 'Artists') {
+            Get.to(ArtistListviewPage());
+          }
+          if (title == 'Trending') {
+            Get.to(ListviewPage());
+          }
+        },
+        child: const Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: Colors.white,
+        ),
       ),
     ],
   );

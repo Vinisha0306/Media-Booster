@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:media_player/views/audio_player_screen.dart';
 import 'package:media_player/views/home_screen.dart';
+import 'package:media_player/views/ListViews/listView.dart';
 import 'package:media_player/views/splash_screen.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => SplashScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
-        GetPage(name: '/audio', page: () => AudioPlayerScreen())
+        GetPage(name: '/audio', page: () => AudioPlayerScreen()),
+        GetPage(name: '/listview', page: () => ListviewPage()),
       ],
     );
   }

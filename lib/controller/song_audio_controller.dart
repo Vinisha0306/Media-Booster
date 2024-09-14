@@ -12,7 +12,7 @@ class SongAudioController {
             metas: Metas(title: 'Song'),
           ),
           autoStart: false,
-          showNotification: true,
+          loopMode: LoopMode.playlist,
         )
         .then(
           (value) => print('data init'),
