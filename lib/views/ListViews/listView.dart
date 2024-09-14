@@ -30,55 +30,59 @@ class ListviewPage extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.black,
-        body: ListView.separated(
-            itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    songAudioController.currentAudio =
-                        trendingSongList[index]['song'];
-                    print('print data :: ${songAudioController.currentAudio}');
-                    Get.toNamed(
-                      '/audio',
-                      arguments: index,
-                    );
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image(
-                        image: NetworkImage(
-                          trendingSongList[index]['image'],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView.separated(
+              itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      songAudioController.currentAudio =
+                          trendingSongList[index]['song'];
+                      print(
+                          'print data :: ${songAudioController.currentAudio}');
+                      Get.toNamed(
+                        '/audio',
+                        arguments: index,
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image(
+                          image: NetworkImage(
+                            trendingSongList[index]['image'],
+                          ),
+                          width: 100,
                         ),
-                        width: 100,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              trendingSongList[index]['title'],
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.blueAccent,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              trendingSongList[index]['subTitle'],
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+                        const SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                trendingSongList[index]['title'],
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                trendingSongList[index]['subTitle'],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: trendingSongList.length),
+              separatorBuilder: (context, index) => Divider(),
+              itemCount: trendingSongList.length),
+        ),
       ),
     );
   }

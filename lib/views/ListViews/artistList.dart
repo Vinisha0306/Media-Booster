@@ -31,38 +31,41 @@ class ArtistListviewPage extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.black,
-        body: ListView.separated(
-            itemBuilder: (context, index) => Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image(
-                      image: NetworkImage(
-                        artistsList[index]['image'],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView.separated(
+              itemBuilder: (context, index) => Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image(
+                        image: NetworkImage(
+                          artistsList[index]['image'],
+                        ),
+                        width: 100,
                       ),
-                      width: 100,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            artistsList[index]['name'],
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.bold,
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              artistsList[index]['name'],
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: artistsList.length),
+                    ],
+                  ),
+              separatorBuilder: (context, index) => Divider(),
+              itemCount: artistsList.length),
+        ),
       ),
     );
   }
